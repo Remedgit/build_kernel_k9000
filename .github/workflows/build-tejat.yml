@@ -44,7 +44,7 @@ jobs:
           make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu-
 
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: kernel-build
           path: ./kernel-source/out/arch/arm64/boot/Image.gz
