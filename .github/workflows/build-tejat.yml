@@ -31,15 +31,13 @@ jobs:
         run: |
           git clone https://github.com/Remedgit/android_kernel_kirin9000.git kernel-source
 
-      - name: Change to kernel source directory
+
+      - name: Configure
         run: |
           cd kernel-source
           echo "Now PWD is: "
           pwd
           mkdir -p out
-
-      - name: Configure
-        run: |
           ls arch/arm64/configs/merge_baltimore_defconfig
           export ARCH=arm64
           export SUBARCH=arm64
