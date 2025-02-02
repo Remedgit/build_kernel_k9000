@@ -38,6 +38,9 @@ jobs:
           export SUBARCH=arm64
           echo "Now PWD is: "
           pwd
+          echo
+          echo
+          ls
 
       - name: Configure
         run: |
