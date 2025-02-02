@@ -1,0 +1,50 @@
+name: Kernel Build by tejat
+# 实际上是deepseek和我一起写的（
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential git make gcc bc bison flex libssl-dev
+
+      - name: Clone toolchain
+        run: |
+          git clone https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b.git toolchain
+
+      - name: Set PATH
+        run: |
+          echo "PATH=$GITHUB_WORKSPACE/toolchain/bin:$PATH" >> $GITHUB_ENV
+
+      - name: Clone kernel source
+        run: |
+          git clone https://github.com/Remedgit/android_kernel_kirin9000.git kernel-source
+
+      - name: Change to kernel source directory
+        run: |
+          cd kernel-source
+
+      - name: Configure
+        run: |
+          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu- tejat_deconfig
+
+      - name: Build
+        run: |
+          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu-
+
+      - name: Upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: kernel-build
+          path: ./kernel-source/out/arch/arm64/boot/Image.gz
