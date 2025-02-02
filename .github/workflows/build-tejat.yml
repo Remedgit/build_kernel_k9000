@@ -40,8 +40,11 @@ jobs:
 
       - name: Configure
         run: |
+          ls arch/arm64/configs/merge_baltimore_defconfig
           export ARCH=arm64
           export SUBARCH=arm64
+          echo $ARCH
+          echo $SUBARCH
           make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu- merge_baltimore_defconfig
 
       - name: Build
