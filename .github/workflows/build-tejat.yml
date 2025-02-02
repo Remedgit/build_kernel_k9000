@@ -34,6 +34,9 @@ jobs:
       - name: Change to kernel source directory
         run: |
           cd kernel-source
+          export ARCH=arm64
+          export SUBARCH=arm64
+          echo "Now PWD is: "
           pwd
 
       - name: Configure
