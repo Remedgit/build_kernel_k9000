@@ -43,8 +43,8 @@ jobs:
           export SUBARCH=arm64
           echo $ARCH
           echo $SUBARCH
-          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu- merge_baltimore_defconfig
-          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu-
+          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.lld O=out KCFLAGS+=-Wno-error merge_baltimore_defconfig
+          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 CROSS_COMPILE=aarch64-linux-gnu- CROSS_COMPILE_ARM32=arm-linux-gnuabeihf- CC=clang LD=ld.lld HOSTCC=clang HOSTLD=ld.lld O=out KCFLAGS+=-Wno-error
 
       - name: Upload
         uses: actions/upload-artifact@v4
