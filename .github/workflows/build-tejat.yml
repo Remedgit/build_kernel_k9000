@@ -34,10 +34,11 @@ jobs:
       - name: Change to kernel source directory
         run: |
           cd kernel-source
+          pwd
 
       - name: Configure
         run: |
-          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu- tejat_deconfig
+          make -j8 KBUILD_BUILD_USER=tejat KBUILD_BUILD_HOST=GithubActionAutoBuild ARCH=arm64 SUBARCH=arm64 O=out CC=clang CROSS_COMPILE=aarch64-linux-android- CROSS_COMPILE_ARM32=arm-linux-androideabi- CLANG_TRIPLE=aarch64-linux-gnu- merge_baltimore_defconfig
 
       - name: Build
         run: |
