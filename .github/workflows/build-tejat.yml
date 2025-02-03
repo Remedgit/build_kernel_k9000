@@ -22,6 +22,12 @@ jobs:
       - name: Clone toolchain
         run: |
           git clone https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b.git toolchain
+          echo "Clone Again"
+          git clone https://github.com/LineageOS/android_prebuilts_clang_kernel_linux-x86_clang-r416183b.git toolchain2
+          echo "Move"
+          mv toolchain2 clang-r416183b1
+          mkdir -p ../prebuilts/clang/host/linux-x86/
+          mv clang-r416183b1 ../prebuilts/clang/host/linux-x86/
 
       - name: Set PATH
         run: |
@@ -30,7 +36,6 @@ jobs:
       - name: Clone kernel source
         run: |
           git clone https://github.com/Remedgit/android_kernel_kirin9000.git kernel-source
-
 
       - name: Configure and Build
         run: |
