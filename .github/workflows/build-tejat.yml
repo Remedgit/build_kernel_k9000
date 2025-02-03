@@ -36,7 +36,7 @@ jobs:
 
       - name: Clone kernel source
         run: |
-          git clone https://github.com/Remedgit/android_kernel_kirin9000.git kernel-source
+          git clone https://github.com/Remedgit/Remedgit-android_kernel_kirin9000.git kernel-source
 
       - name: Configure and Build
         run: |
